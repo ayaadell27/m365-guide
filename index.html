@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>كتيب الطريق إلى Cloud / M365 Administrator</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#f4f8fb;--card:#fff;--ink:#0f2a43;--mute:#51667a;--line:#d5e1ea;--accent:#0a64c8;--soft:#e3effb;--ok:#13806a;--warm:#f2a93b;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1a29;--card:#12263a;--ink:#e6eef6;--mute:#93a9bd;--line:#244058;--accent:#5aa9f5;--soft:#173553;--ok:#4cc9aa;--warm:#f2b75a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0c1a29;--card:#12263a;--ink:#e6eef6;--mute:#93a9bd;--line:#244058;--accent:#5aa9f5;--soft:#173553;--ok:#4cc9aa;--warm:#f2b75a;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',Tahoma,Arial,sans-serif;line-height:1.85;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 36px}
+h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.25;margin:0 0 14px;font-weight:800}
+.lead{color:var(--mute);font-size:1.1rem;max-width:34em;margin:0 0 28px}
+.hour{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.bar{display:flex;height:46px;border-radius:8px;overflow:hidden;margin:12px 0 10px;font-weight:600;font-size:.9rem;color:#fff}
+.bar span{display:flex;align-items:center;justify-content:center}
+.b1{flex:20;background:#0a64c8}.b2{flex:30;background:#13806a}.b3{flex:10;background:#b86e00}
+.legend{display:flex;flex-wrap:wrap;gap:6px 22px;color:var(--mute);font-size:.95rem}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+nav .wrap{display:flex;gap:18px;overflow-x:auto;padding-top:10px;padding-bottom:10px}
+nav a{color:var(--mute);text-decoration:none;white-space:nowrap;font-weight:600}
+nav a:hover{color:var(--accent)}
+section{padding:44px 0 6px}
+h2{font-size:1.7rem;margin:0 0 6px;font-weight:800}
+h3{font-size:1.2rem;margin:26px 0 8px}
+p.sub{color:var(--mute);margin:0 0 18px}
+.prog{position:sticky;top:46px;background:var(--bg);padding:10px 0;z-index:4}
+.track{height:10px;background:var(--soft);border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--ok);transition:width .3s}
+.ptxt{font-size:.9rem;color:var(--mute);margin-top:4px}
+.phase{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.phase h3{margin-top:0}
+.tag{display:inline-block;background:var(--soft);color:var(--accent);border-radius:6px;padding:0 10px;font-size:.88rem;font-weight:600}
+label.w{display:flex;gap:12px;align-items:flex-start;padding:7px 0;border-top:1px solid var(--line);cursor:pointer}
+label.w:first-of-type{border-top:0}
+label.w input{margin-top:9px;width:18px;height:18px;accent-color:var(--ok);flex:none}
+label.w b{display:block;font-weight:600}
+label.w small{color:var(--mute)}
+input:checked+div{opacity:.55;text-decoration:line-through}
+.tabs{display:flex;gap:10px;margin:10px 0}
+.tabs button{font:inherit;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 16px;border-radius:8px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{padding:9px 12px;text-align:right;border-bottom:1px solid var(--line);font-size:.98rem}
+th{background:var(--soft)}
+.scroll{overflow-x:auto}
+.lesson{background:var(--card);border:1px solid var(--line);border-inline-start:5px solid var(--accent);border-radius:12px;padding:6px 22px 16px}
+code{direction:ltr;unicode-bidi:embed;background:var(--soft);padding:1px 6px;border-radius:5px;font-size:.92em}
+.note{background:var(--soft);border-radius:10px;padding:12px 16px;border-inline-start:5px solid var(--warm);margin:16px 0}
+ul.res{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+ul.res li{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px}
+ul.res a{color:var(--accent);font-weight:600;text-decoration:none;direction:ltr;unicode-bidi:embed}
+ul.res a:hover{text-decoration:underline}
+ul.res span{display:block;color:var(--mute);font-size:.93rem}
+details.lesson{margin:14px 0;padding:4px 22px}details.lesson summary{cursor:pointer;font-weight:800;font-size:1.2rem;padding:10px 0}details.lesson[open] summary{border-bottom:1px solid var(--line);margin-bottom:8px}pre{direction:ltr;text-align:left;background:var(--soft);padding:12px 14px;border-radius:8px;overflow-x:auto;font-size:.88rem;line-height:1.6}pre code{background:none;padding:0}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+footer{padding:40px 0 60px;color:var(--mute);font-size:.92rem}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>الطريق إلى Cloud / M365 Administrator</h1>
+<p class="lead">كتيب استرشادي من الصفر: خطة 9 شهور، ساعة مذاكرة في اليوم، دروس قصيرة، مصادر جاهزة، وقايمة تتابع بيها تقدمك.</p>
+<div class="hour">
+<strong>ساعتك اليومية</strong>
+<div class="bar" role="img" aria-label="20 دقيقة شرح، 30 دقيقة تطبيق، 10 دقايق مراجعة"><span class="b1">20</span><span class="b2">30</span><span class="b3">10</span></div>
+<div class="legend"><span>20 دقيقة: مشاهدة أو قراءة الدرس</span><span>30 دقيقة: تطبيق في الـ Lab</span><span>10 دقايق: ملخص بخط إيدك</span></div>
+</div>
+</div></header>
+
+<nav><div class="wrap"><a href="#plan">الخطة</a><a href="#lesson1">الدرس الأول</a><a href="#exams">الشهادات</a><a href="#res">المصادر</a><a href="#cv">تحديث الـ CV</a></div></nav>
+
+<main class="wrap">
+<section id="plan">
+<h2>الخطة الأسبوعية</h2>
+<p class="sub">6 أيام مذاكرة، واليوم السابع راحة. علّم على كل أسبوع تخلصه، والتقدم بيتحفظ في متصفحك.</p>
+<div class="prog"><div class="track"><div class="fill" id="fill"></div></div><div class="ptxt" id="ptxt"></div></div>
+
+<div class="phase"><h3>المرحلة 1: الأساسيات <span class="tag">الأسابيع 1–8</span></h3>
+<label class="w"><input type="checkbox" data-k="a1"><div><b>أسبوع 1: يعني إيه Cloud وMicrosoft 365</b><small>SaaS وPaaS وIaaS، التينانت، التراخيص، وفتح Tenant تجريبي (الدرس الأول تحت)</small></div></label>
+<label class="w"><input type="checkbox" data-k="a2"><div><b>أسبوع 2: Microsoft Entra ID</b><small>المستخدمين والـ Groups والتراخيص، والفرق بينه وبين Active Directory</small></div></label>
+<label class="w"><input type="checkbox" data-k="a3"><div><b>أسبوع 3: خدمات Microsoft 365</b><small>Exchange Online وTeams وSharePoint وOneDrive من لوحة الإدارة</small></div></label>
+<label class="w"><input type="checkbox" data-k="a4"><div><b>أسبوع 4: الأمان الأساسي</b><small>MFA وConditional Access وفكرة Zero Trust ومقدمة Defender</small></div></label>
+<label class="w"><input type="checkbox" data-k="a5"><div><b>أسبوع 5: الامتثال والأسعار والدعم</b><small>Purview وخطط الترخيص وSLA ومراكز الدعم</small></div></label>
+<label class="w"><input type="checkbox" data-k="a6"><div><b>أسبوع 6: PowerShell من الصفر</b><small>Cmdlets والـ Pipeline والمتغيرات والحلقات</small></div></label>
+<label class="w"><input type="checkbox" data-k="a7"><div><b>أسبوع 7: PowerShell مع Microsoft Graph</b><small>سكريبت لإنشاء مستخدمين وتقرير بالتراخيص</small></div></label>
+<label class="w"><input type="checkbox" data-k="a8"><div><b>أسبوع 8: مراجعة وامتحان MS-900 أو AZ-900</b><small>Practice Assessment مجاني ثم احجز الامتحان</small></div></label>
+</div>
+
+<div class="phase"><h3>المرحلة 2: إدارة الأجهزة <span class="tag">الأسابيع 9–20 | MD-102</span></h3>
+<label class="w"><input type="checkbox" data-k="b1"><div><b>أسبوع 9–10: مقدمة Intune والتسجيل</b><small>Enrollment لويندوز وPrimary User وGroups للأجهزة</small></div></label>
+<label class="w"><input type="checkbox" data-k="b2"><div><b>أسبوع 11–12: Windows Autopilot والنشر</b><small>تجهيز لابتوب جديد بدون Imaging يدوي، وتربطه بخبرتك في Laptop Deployment</small></div></label>
+<label class="w"><input type="checkbox" data-k="b3"><div><b>أسبوع 13–14: Configuration Profiles وCompliance</b><small>بدائل Group Policy في السحابة</small></div></label>
+<label class="w"><input type="checkbox" data-k="b4"><div><b>أسبوع 15–16: تثبيت التطبيقات وتحديثات ويندوز</b><small>Win32 Apps وUpdate Rings</small></div></label>
+<label class="w"><input type="checkbox" data-k="b5"><div><b>أسبوع 17–18: أمان الأجهزة</b><small>BitLocker وDefender for Endpoint وسياسات الحماية</small></div></label>
+<label class="w"><input type="checkbox" data-k="b6"><div><b>أسبوع 19: Hybrid وCo-management</b><small>ربط AD المحلي بـ Entra ID</small></div></label>
+<label class="w"><input type="checkbox" data-k="b7"><div><b>أسبوع 20: مراجعة وامتحان MD-102</b><small>راجع الـ Study Guide المحدّث من صفحة الامتحان</small></div></label>
+</div>
+
+<div class="phase"><h3>المرحلة 3: التخصص <span class="tag">الأسابيع 21–36</span></h3>
+<p class="sub">اختار مسار واحد:</p>
+<div class="tabs"><button id="tA" aria-pressed="true">Azure: AZ-104</button><button id="tB" aria-pressed="false">Identity: SC-300</button></div>
+<div id="pA">
+<label class="w"><input type="checkbox" data-k="c1"><div><b>أسبوع 21–22: Identity وGovernance في Azure</b></div></label>
+<label class="w"><input type="checkbox" data-k="c2"><div><b>أسبوع 23–24: Storage</b></div></label>
+<label class="w"><input type="checkbox" data-k="c3"><div><b>أسبوع 25–28: Compute: Virtual Machines وApp Service</b></div></label>
+<label class="w"><input type="checkbox" data-k="c4"><div><b>أسبوع 29–31: Networking: VNet وNSG وVPN</b><small>تستفيد من خبرتك في CCNA</small></div></label>
+<label class="w"><input type="checkbox" data-k="c5"><div><b>أسبوع 32–33: Monitoring وBackup</b></div></label>
+<label class="w"><input type="checkbox" data-k="c6"><div><b>أسبوع 34–36: مراجعة وامتحان AZ-104</b></div></label>
+</div>
+<div id="pB" hidden>
+<label class="w"><input type="checkbox" data-k="d1"><div><b>أسبوع 21–23: تنفيذ Identity وإدارة المستخدمين</b></div></label>
+<label class="w"><input type="checkbox" data-k="d2"><div><b>أسبوع 24–27: Authentication وMFA وPasswordless</b></div></label>
+<label class="w"><input type="checkbox" data-k="d3"><div><b>أسبوع 28–31: Access Management وConditional Access</b></div></label>
+<label class="w"><input type="checkbox" data-k="d4"><div><b>أسبوع 32–33: Identity Governance وPIM</b></div></label>
+<label class="w"><input type="checkbox" data-k="d5"><div><b>أسبوع 34–36: مراجعة وامتحان SC-300</b></div></label>
+</div>
+</div>
+</section>
+
+<section id="lesson1">
+<h2>الدرس الأول: Cloud وMicrosoft 365</h2>
+<div class="lesson">
+<h3>الفكرة</h3>
+<p>زمان الشركة كانت بتشتري سيرفرات وتديرها بنفسها (On-Premises). في الـ Cloud بتأجر الخدمة من مايكروسوفت وتدفع اشتراك، وهي اللي بتشغل السيرفرات وتصونها.</p>
+<div class="scroll"><table><tr><th>زمان</th><th>دلوقتي</th></tr>
+<tr><td>سيرفر Exchange</td><td>Exchange Online</td></tr>
+<tr><td>File Server</td><td>SharePoint وOneDrive</td></tr>
+<tr><td>Active Directory محلي</td><td>Microsoft Entra ID</td></tr>
+<tr><td>Group Policy</td><td>Intune</td></tr></table></div>
+<h3>3 مصطلحات لازم تحفظهم</h3>
+<p><b>SaaS:</b> برنامج جاهز بتستخدمه فقط (Outlook وTeams، وMicrosoft 365 منهم).<br><b>PaaS:</b> منصة تبني عليها تطبيقك من غير إدارة سيرفرات.<br><b>IaaS:</b> بتأجر سيرفر افتراضي وتديره أنت (Azure VM).</p>
+<h3>Tenant وLicense</h3>
+<p><b>Tenant</b> هو حساب الشركة عند مايكروسوفت (<code>company.onmicrosoft.com</code>)، فيه مستخدميها وأجهزتها وإعداداتها. <b>License</b> هو الترخيص اللي لازم تديه للمستخدم عشان يستخدم الخدمات.</p>
+<h3>تطبيق عملي</h3>
+<p>1) سجّل في Tenant تجريبي من Microsoft 365 (العروض بتتغير، فشوف المتاح وقتها).<br>2) ادخل على <code>admin.microsoft.com</code>.<br>3) من Users ثم Active users ضيف مستخدم تجريبي واديله License.<br>4) اتفرج على اللوحة من غير ما تغير إعدادات.</p>
+<h3>اختبر نفسك</h3>
+<p>1) إيه الفرق بين SaaS وIaaS؟<br>2) إيه الخدمة اللي بتحل مكان سيرفر الإيميل المحلي؟<br>3) يعني إيه Tenant؟</p>
+</div>
+<h2 style="margin-top:40px">الدروس 2 إلى 8: المرحلة الأولى</h2>
+<p class="sub">اضغط على عنوان أي درس عشان يفتح. كل درس يتاخد في أسبوع.</p>
+
+<details class="lesson"><summary>الدرس 2: Microsoft Entra ID</summary>
+<p>Entra ID (اسمه القديم Azure AD) هو نظام الهوية في السحابة: بيقرر مين يدخل وعلى أنهي تطبيق.</p>
+<div class="scroll"><table><tr><th></th><th>Active Directory المحلي</th><th>Entra ID</th></tr>
+<tr><td>البروتوكولات</td><td>Kerberos وLDAP</td><td>OAuth وOIDC وSAML</td></tr>
+<tr><td>التنظيم</td><td>OUs</td><td>Groups بدون OUs</td></tr>
+<tr><td>التحكم في الأجهزة</td><td>Group Policy</td><td>Intune وConditional Access</td></tr></table></div>
+<h3>أنواع المستخدمين</h3>
+<p><b>Cloud-only:</b> اتعمل في السحابة. <b>Synced:</b> جاي من AD المحلي عن طريق Entra Connect. <b>Guest:</b> شخص من برا الشركة.</p>
+<h3>الـ Groups والتراخيص</h3>
+<p>في نوعين: Security Group لصلاحيات الدخول، وMicrosoft 365 Group للتعاون (Teams وSharePoint). العضوية ممكن تكون Assigned (يدوي) أو Dynamic (بقواعد، وبتحتاج ترخيص P1). والأفضل تدي التراخيص للـ Group بدل كل مستخدم لوحده. وطبّق مبدأ أقل صلاحية: ما تديش Global Administrator إلا للضرورة.</p>
+<h3>تطبيق عملي</h3>
+<p>1) من <code>entra.microsoft.com</code> اعمل 3 مستخدمين.<br>2) اعمل Security Group اسمه IT-Team وضيفهم.<br>3) اديله License عن طريق الـ Group.<br>4) ادخل بمستخدم تجريبي من نافذة Private.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين Synced وCloud-only؟ ولماذا نفضل ترخيص بالـ Group؟</p></details>
+
+<details class="lesson"><summary>الدرس 3: خدمات Microsoft 365</summary>
+<p><b>Exchange Online:</b> الإيميل. تعلم Shared Mailbox (صندوق مشترك بدون ترخيص لو أقل من 50 جيجا) وDistribution Group، وفكرة السجلات MX وSPF وDKIM وDMARC اللي بتحمي الإيميل من الانتحال.</p>
+<p><b>Teams:</b> كل Team وراه Microsoft 365 Group وموقع SharePoint. الـ Channels ممكن تبقى Standard أو Private.</p>
+<p><b>SharePoint وOneDrive:</b> SharePoint للمواقع والملفات المشتركة، وOneDrive للملفات الشخصية. اتعلم Sharing Links (Anyone وSpecific people) وإزاي تتحكم في المشاركة الخارجية.</p>
+<h3>تطبيق عملي</h3>
+<p>1) اعمل Shared Mailbox من <code>admin.microsoft.com</code>.<br>2) اعمل Team جديد وضيف قناة Private.<br>3) ارفع ملف على OneDrive وشاركه مع إيميل خارجي، وبعدين ألغِ المشاركة.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه علاقة Team بـ SharePoint؟ وإيه فايدة SPF؟</p></details>
+
+<details class="lesson"><summary>الدرس 4: الأمان الأساسي</summary>
+<p><b>MFA:</b> إثبات الهوية بأكتر من طريقة، وهو أهم إجراء أمان. <b>Zero Trust:</b> تتحقق من كل طلب، وتدي أقل صلاحية، وتفترض إن الاختراق ممكن.</p>
+<p><b>Security Defaults:</b> إعداد جاهز ومجاني بيفعّل MFA. <b>Conditional Access:</b> سياسات بتقول: لو (مستخدم + تطبيق + موقع + جهاز) يبقى (اطلب MFA أو امنع الدخول).</p>
+<p>عائلة Defender: Defender for Office 365 للإيميل، وDefender for Endpoint للأجهزة، وDefender for Identity، كلهم بيتجمعوا في Defender XDR.</p>
+<div class="note">قبل ما تفعّل أي سياسة، اعمل حساب طوارئ (Break-glass) مستثنى منها، وجرّب السياسة الأول بوضع Report-only عشان ما تقفلش على نفسك.</div>
+<h3>تطبيق عملي</h3>
+<p>من <code>entra.microsoft.com</code> اعمل سياسة Conditional Access لمستخدم تجريبي: Require MFA، بوضع Report-only، وبعدين اتفرج على نتايجها في Sign-in logs.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين Security Defaults وConditional Access؟ ولماذا نعمل Break-glass؟</p></details>
+
+<details class="lesson"><summary>الدرس 5: الامتثال والأسعار والدعم</summary>
+<p><b>Microsoft Purview:</b> أدوات حماية البيانات: Sensitivity Labels لتصنيف الملفات، وDLP لمنع تسريب البيانات الحساسة، وRetention لتحديد مدة الاحتفاظ، وeDiscovery للبحث القانوني، وAudit لتتبع الأنشطة.</p>
+<p><b>الباقات:</b> Business Basic وStandard وPremium للشركات الصغيرة (لحد 300 مستخدم)، وE3 وE5 للكبيرة. اللي بيفرق هو الأمان وإدارة الأجهزة وPurview.</p>
+<p><b>Shared Responsibility:</b> مايكروسوفت مسؤولة عن البنية، وأنت مسؤول عن المستخدمين والبيانات والإعدادات. وفي الامتحان هتتسأل عن الـ SLA (مثلاً 99.9%) وإزاي تتابع Service Health وMessage Center في لوحة الإدارة.</p>
+<h3>تطبيق عملي</h3>
+<p>1) افتح Service health وMessage center.<br>2) افتح <code>purview.microsoft.com</code> وابحث في الـ Audit عن نشاط مستخدم.<br>3) اقرا الفرق بين باقتين على موقع مايكروسوفت.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين DLP وSensitivity Labels؟</p></details>
+
+<details class="lesson"><summary>الدرس 6: PowerShell من الصفر</summary>
+<p>كل أمر بصيغة <code>Verb-Noun</code> زي Get-Service. وأهم 3 أوامر للتعلم: <code>Get-Help</code> و<code>Get-Command</code> و<code>Get-Member</code>. الـ Pipeline (الرمز |) بيمرّر ناتج أمر لأمر بعده.</p>
+<pre><code>Get-Service | Where-Object Status -eq 'Running' |
+  Select-Object Name,Status | Export-Csv .\running.csv -NoTypeInformation
+
+$names = 'Ali','Mona','Omar'
+foreach ($n in $names) { Write-Output "Hello $n" }</code></pre>
+<h3>تطبيق عملي</h3>
+<p>1) افتح PowerShell على جهازك.<br>2) اكتب تقرير بالعمليات (Get-Process) الأكتر استهلاكاً للذاكرة وصدّره CSV.<br>3) اكتب حلقة بتعرض أسماء ملفات مجلد معين.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه وظيفة الـ Pipeline؟ وإزاي تعرف خصائص أي ناتج؟</p></details>
+
+<details class="lesson"><summary>الدرس 7: PowerShell مع Microsoft Graph</summary>
+<p>موديول AzureAD القديم بيتلغى، والبديل الرسمي هو <b>Microsoft Graph PowerShell</b>.</p>
+<pre><code>Install-Module Microsoft.Graph -Scope CurrentUser
+Connect-MgGraph -Scopes "User.ReadWrite.All","Organization.Read.All"
+
+Get-MgUser -All | Select-Object DisplayName,UserPrincipalName |
+  Export-Csv users.csv -NoTypeInformation
+Get-MgSubscribedSku | Select-Object SkuPartNumber,ConsumedUnits
+
+$pw = @{ Password="ChangeMe!2026x"; ForceChangePasswordNextSignIn=$true }
+New-MgUser -DisplayName "Test User" -MailNickname "test.user" `
+  -UserPrincipalName "test.user@yourtenant.onmicrosoft.com" `
+  -AccountEnabled -PasswordProfile $pw</code></pre>
+<h3>تطبيق عملي</h3>
+<p>1) صدّر كل مستخدمين الـ Tenant لملف CSV.<br>2) اعمل تقرير بالتراخيص المستهلكة.<br>3) اعمل سكريبت بيقرا CSV وينشئ مستخدمين منه، وارفعه على GitHub بدون أي بيانات حقيقية.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الـ Scopes وليه بنحددها في Connect-MgGraph؟</p></details>
+
+<details class="lesson"><summary>الدرس 8: المراجعة وامتحان المرحلة الأولى</summary>
+<ul>
+<li>راجع ملخصاتك بخط إيدك للدروس من 1 لـ 7.</li>
+<li>خد الـ Practice Assessment المجاني من صفحة الامتحان على Microsoft Learn، وأعد أي موضوع تقل نتيجتك فيه عن 80%.</li>
+<li>الحجز بيتم من صفحة الامتحان على Microsoft Learn (زر Schedule exam) عن طريق Pearson VUE، سواء في مركز أو من البيت.</li>
+<li>في الامتحان: اقرا السؤال لآخره، واستبعد الإجابات الغلط، وما تقضيش وقت طويل في سؤال واحد.</li>
+</ul>
+<p>بعد النجاح ضيف الشهادة للـ CV والـ LinkedIn وكمّل على المرحلة 2.</p></details>
+
+<h2 style="margin-top:44px">المرحلة 2: إدارة الأجهزة (MD-102)</h2>
+<p class="sub">الأسابيع 9 إلى 20. كل تطبيق عملي بتعمله على Tenant التجريبي وجهاز افتراضي (VM) بويندوز 11.</p>
+
+<details class="lesson"><summary>أسبوع 9–10: مقدمة Intune والتسجيل</summary>
+<p>Intune هو نظام إدارة الأجهزة والتطبيقات من السحابة (MDM وMAM). الجهاز لازم يتسجل (Enroll) عشان يتدار. طرق التسجيل: Entra Join مع تسجيل تلقائي (Automatic Enrollment)، وAutopilot، وEntra Registered للأجهزة الشخصية (BYOD)، وCo-management مع Configuration Manager.</p>
+<p>تنظيم الأجهزة بيتم بالـ Groups (Static أو Dynamic)، وكل جهاز ليه Primary User.</p>
+<h3>تطبيق عملي</h3>
+<p>1) في <code>entra.microsoft.com</code> فعّل MDM user scope لمستخدميك.<br>2) اعمل Join لـ VM على Entra ID.<br>3) اتأكد إنه ظهر في <code>intune.microsoft.com</code> تحت Devices.<br>4) اعمل Dynamic Group لكل أجهزة ويندوز.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين Entra Join وEntra Registered؟ ومتى تستخدم كل واحد؟</p></details>
+
+<details class="lesson"><summary>أسبوع 11–12: Windows Autopilot</summary>
+<p>Autopilot بيجهز اللابتوب الجديد من أول تشغيل بدون Imaging يدوي: المستخدم يفتح الجهاز ويسجل دخول، والباقي أوتوماتيك. المكونات: Hardware Hash لتسجيل الجهاز، وDeployment Profile (User-driven غالباً)، وEnrollment Status Page (ESP) لعرض تقدم التثبيت، وGroup Tag لتصنيف الأجهزة. وفيه نسخة أحدث اسمها Autopilot Device Preparation، راجعها في الـ Study Guide.</p>
+<h3>تطبيق عملي</h3>
+<p>1) استخرج Hardware Hash من الـ VM بسكريبت Get-WindowsAutopilotInfo.<br>2) ارفعه من Devices ثم Enrollment ثم Windows Autopilot.<br>3) اعمل Deployment Profile واربطه بـ Group.<br>4) اعمل Reset للـ VM وشوف التجهيز التلقائي.</p>
+<h3>اختبر نفسك</h3>
+<p>إزاي Autopilot بيختصر وقت تجهيز اللابتوبات اللي كنت بتعملها يدوي؟</p></details>
+
+<details class="lesson"><summary>أسبوع 13–14: Configuration Profiles وCompliance</summary>
+<p>Configuration Profiles بتطبق إعدادات على الأجهزة (بديل Group Policy): Settings Catalog وTemplates وAdministrative Templates. أما Compliance Policy فبتحدد الجهاز سليم ولا لأ (BitLocker مفعّل، حد أدنى للنسخة، Password). وربطها بـ Conditional Access بيسمح فقط للأجهزة السليمة تدخل على الإيميل والملفات.</p>
+<h3>تطبيق عملي</h3>
+<p>1) اعمل Profile يمنع USB Storage أو يفرض خلفية معينة.<br>2) اعمل Compliance Policy تشترط BitLocker وPassword.<br>3) اعمل Conditional Access بتطلب Compliant device (جرّبها Report-only الأول).</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين Configuration Profile وCompliance Policy؟</p></details>
+
+<details class="lesson"><summary>أسبوع 15–16: التطبيقات وتحديثات ويندوز</summary>
+<p>أنواع التطبيقات في Intune: Microsoft Store، وWin32 (بتحزمه بأداة Win32 Content Prep Tool لملف .intunewin وبتحدد Detection Rule)، وMicrosoft 365 Apps. التحديثات بتتدار بـ Update Rings (توقيت وتأجيل التحديثات) وFeature Update Policies (تثبيت نسخة معينة من ويندوز)، وبتطلّعها على مراحل (Pilot ثم الباقي).</p>
+<h3>تطبيق عملي</h3>
+<p>1) انشر 7-Zip كتطبيق Win32 مع Detection Rule.<br>2) اعمل Update Ring لمجموعة تجريبية.<br>3) راجع تقارير نجاح التثبيت.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه وظيفة Detection Rule؟ ولماذا ننشر التحديثات على مراحل؟</p></details>
+
+<details class="lesson"><summary>أسبوع 17–18: أمان الأجهزة</summary>
+<p>من Endpoint Security في Intune: BitLocker (مع حفظ مفتاح الاسترداد في Entra)، وDefender Antivirus، وFirewall، وAttack Surface Reduction (ASR) Rules، وSecurity Baselines. وWindows LAPS بيدير باسورد الـ Local Admin تلقائياً. كمان تقدر تعمل Onboarding للأجهزة على Defender for Endpoint من Intune.</p>
+<h3>تطبيق عملي</h3>
+<p>1) فعّل BitLocker بسياسة وشوف المفتاح في Entra.<br>2) فعّل Windows LAPS واسترجع الباسورد.<br>3) طبّق Security Baseline على مجموعة تجريبية.</p>
+<h3>اختبر نفسك</h3>
+<p>ليه Windows LAPS أحسن من باسورد Local Admin واحد على كل الأجهزة؟</p></details>
+
+<details class="lesson"><summary>أسبوع 19: Hybrid وCo-management</summary>
+<p>كتير من الشركات لسه عندها AD محلي. Hybrid Join بيخلي الجهاز مسجل في AD وEntra معاً، ومزامنة الهويات بتتم بـ Entra Connect. وCo-management معناه إن Configuration Manager وIntune بيديروا الجهاز معاً، وبتنقل الـ Workloads (زي Compliance أو Updates) تدريجياً للسحابة.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين Entra Hybrid Join وEntra Join؟ وإمتى الشركة تحتاج Hybrid؟</p></details>
+
+<details class="lesson"><summary>أسبوع 20: مراجعة وامتحان MD-102</summary>
+<ul>
+<li>افتح الـ Study Guide من صفحة MD-102 على Microsoft Learn، لأنه هيتحدث في 27 أكتوبر 2026.</li>
+<li>رتب أسبوعك: يومين على التسجيل والـ Autopilot، يومين على السياسات والتطبيقات، يومين على الأمان.</li>
+<li>خد الـ Practice Assessment وكرر كل نقطة ضعيفة بتطبيق عملي في الـ Lab.</li>
+<li>احجز الامتحان وأضف الشهادة للـ CV وLinkedIn، وابدأ قدّم على وظايف Endpoint Administrator.</li>
+</ul></details>
+
+<h2 style="margin-top:44px">المرحلة 3: التخصص</h2>
+<p class="sub">الأسابيع 21 إلى 36. اختار مسار واحد: Azure (AZ-104) أو Identity (SC-300).</p>
+<h3>مسار Azure: AZ-104</h3>
+
+<details class="lesson"><summary>أسبوع 21–22: Identity وGovernance في Azure</summary>
+<p>الصلاحيات في Azure (RBAC) غير أدوار Entra. النطاقات من الأكبر للأصغر: Management Group ثم Subscription ثم Resource Group ثم Resource. وأدوات الحوكمة: Azure Policy لفرض القواعد، وLocks لمنع الحذف، وTags للتصنيف، وCost Management وBudgets للتكلفة.</p>
+<h3>تطبيق عملي</h3>
+<p>افتح اشتراك Azure مجاني، واعمل Resource Group، وادي مستخدماً دور Reader عليه، واعمل Policy تفرض Tag معين.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين Azure RBAC وأدوار Entra؟</p></details>
+
+<details class="lesson"><summary>أسبوع 23–24: Storage</summary>
+<p>Storage Account فيها Blob وFiles وQueues وTables. التكرار (Redundancy): LRS وZRS وGRS وGZRS. مستويات Blob: Hot وCool وCold وArchive. ولمنح وصول مؤقت بتستخدم SAS Token. وAzure Files هي مشاركة ملفات (SMB) في السحابة.</p>
+<h3>تطبيق عملي</h3>
+<p>اعمل Storage Account وContainer، وارفع ملف، وولّد SAS لمدة قصيرة، واعمل Lifecycle Rule تنقل الملفات القديمة لـ Cool.</p>
+<h3>اختبر نفسك</h3>
+<p>إمتى تختار GRS بدل LRS؟</p></details>
+
+<details class="lesson"><summary>أسبوع 25–28: Compute</summary>
+<p>الـ Virtual Machines: الأحجام، والـ Disks، وAvailability Zones للتوافر العالي، وScale Sets للتوسع التلقائي. الأتمتة بقوالب ARM أو Bicep. وللتطبيقات: App Service مع Deployment Slots، والحاويات (Container Instances وContainer Apps).</p>
+<h3>تطبيق عملي</h3>
+<p>انشر VM ويندوز بالبورتال، وبعدين انشر نفس الـ VM بقالب Bicep، واعمل App Service بسيط وSlot للتجربة.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين Availability Set وAvailability Zone؟</p></details>
+
+<details class="lesson"><summary>أسبوع 29–31: Networking</summary>
+<p>هنا بتستفيد من CCNA: Virtual Network وSubnets وNSG (قواعد الدخول والخروج) وVNet Peering وVPN Gateway وAzure DNS. وLoad Balancer للـ Layer 4 وApplication Gateway للـ Layer 7. وAzure Bastion بيدخلك على الـ VM بدون IP عام.</p>
+<h3>تطبيق عملي</h3>
+<p>اعمل VNetين واربطهم بـ Peering، وVM في كل واحد، واختبر Ping، وبعدين اقفل الدخول بـ NSG.</p>
+<h3>اختبر نفسك</h3>
+<p>إمتى تستخدم Application Gateway بدل Load Balancer؟</p></details>
+
+<details class="lesson"><summary>أسبوع 32–33: Monitoring وBackup</summary>
+<p>Azure Monitor وLog Analytics لتجميع السجلات والمقاييس، وAlerts للتنبيه، وRecovery Services Vault للنسخ الاحتياطي (Azure Backup) والتعافي من الكوارث (Site Recovery).</p>
+<h3>تطبيق عملي</h3>
+<p>فعّل Backup على VM، واعمل Alert لو الـ CPU عدّى 80%، واعمل استعلام بسيط في Log Analytics.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين Backup وSite Recovery؟</p></details>
+
+<details class="lesson"><summary>أسبوع 34–36: مراجعة وامتحان AZ-104</summary>
+<ul>
+<li>راجع الـ Study Guide الحالي من صفحة AZ-104، لأن النِّسب بتتغير.</li>
+<li>كرر الـ Labs بنفسك بدون تعليمات، وده أهم من القراءة.</li>
+<li>خد الـ Practice Assessment، واحجز الامتحان، وأضف الشهادة للـ CV.</li>
+</ul></details>
+
+<h3>مسار Identity: SC-300</h3>
+
+<details class="lesson"><summary>أسبوع 21–23: تنفيذ الهوية</summary>
+<p>إعداد Tenant والـ Custom Domains، والمستخدمين الخارجيين (B2B)، وHybrid Identity: Entra Connect أو Cloud Sync، وطرق المصادقة المتزامنة: Password Hash Sync وPass-through وFederation.</p>
+<h3>تطبيق عملي</h3>
+<p>ضيف Guest User وجرّب صلاحياته، واقرا مقارنة بين Entra Connect وCloud Sync.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين Password Hash Sync وFederation؟</p></details>
+
+<details class="lesson"><summary>أسبوع 24–27: المصادقة</summary>
+<p>طرق MFA، وSelf-Service Password Reset (SSPR)، وطرق بدون باسورد: Microsoft Authenticator وFIDO2 وWindows Hello for Business، وAuthentication Strengths، وPassword Protection.</p>
+<h3>تطبيق عملي</h3>
+<p>فعّل SSPR لمجموعة تجريبية وسجّل Authenticator، واعمل Authentication Strength تطلب Phishing-resistant MFA للأدمن.</p>
+<h3>اختبر نفسك</h3>
+<p>ليه FIDO2 أحسن من SMS؟</p></details>
+
+<details class="lesson"><summary>أسبوع 28–31: إدارة الوصول</summary>
+<p>Conditional Access بالتفصيل (Signals وControls وReport-only)، وApp Registrations وEnterprise Applications وSingle Sign-On وصلاحيات الموافقة (Consent)، وأدوار Entra المخصصة.</p>
+<h3>تطبيق عملي</h3>
+<p>سجّل تطبيق بسيط، واعمل Enterprise App مع SSO، واعمل سياسات Conditional Access بحسب الموقع والجهاز.</p>
+<h3>اختبر نفسك</h3>
+<p>إيه الفرق بين App Registration وEnterprise Application؟</p></details>
+
+<details class="lesson"><summary>أسبوع 32–33: الحوكمة وحماية الهوية</summary>
+<p>Entitlement Management وAccess Reviews وPrivileged Identity Management (PIM) لصلاحيات مؤقتة عند الحاجة، وLifecycle Workflows، وIdentity Protection بسياسات المخاطر (User Risk وSign-in Risk).</p>
+<h3>تطبيق عملي</h3>
+<p>فعّل PIM على دور Administrator (لو الترخيص متاح في التجربة)، واعمل Access Review لمجموعة.</p>
+<h3>اختبر نفسك</h3>
+<p>ليه PIM أأمن من إعطاء Global Admin دائم؟</p></details>
+
+<details class="lesson"><summary>أسبوع 34–36: مراجعة وامتحان SC-300</summary>
+<ul>
+<li>راجع الـ Study Guide الحالي من صفحة SC-300.</li>
+<li>كرر الـ Labs وسياسات Conditional Access بنفسك.</li>
+<li>خد الـ Practice Assessment، واحجز الامتحان، وأضف الشهادة للـ CV، وابدأ قدّم على وظايف Identity أو M365 Administrator.</li>
+</ul></details>
+</section>
+
+<section id="exams">
+<h2>الشهادات</h2>
+<div class="note">مايكروسوفت بتلغي وتحدّث امتحانات باستمرار. امتحان MS-102 مثلاً هيتقفل في نهاية نوفمبر 2026، فاتأكد من صفحة أي امتحان على Microsoft Learn قبل ما تحجز.</div>
+<div class="scroll"><table><tr><th>الامتحان</th><th>مناسب لـ</th><th>متى</th></tr>
+<tr><td>MS-900 أو AZ-900</td><td>الأساسيات</td><td>الشهر 2</td></tr>
+<tr><td>MD-102</td><td>Endpoint Administrator (Intune)</td><td>الشهر 5</td></tr>
+<tr><td>AZ-104 أو SC-300</td><td>Azure أو Identity</td><td>الشهر 9</td></tr></table></div>
+</section>
+
+<section id="res">
+<h2>المصادر</h2>
+<h3>تعلّم</h3>
+<ul class="res">
+<li><a href="https://learn.microsoft.com/training/" target="_blank" rel="noopener">Microsoft Learn</a><span>المصدر الأساسي ومجاني بالكامل، فيه مسارات لكل امتحان وPractice Assessments.</span></li>
+<li><a href="https://learn.microsoft.com/credentials/certifications/" target="_blank" rel="noopener">Microsoft Certifications</a><span>صفحات الامتحانات والـ Study Guides والحالة الحالية لكل شهادة.</span></li>
+<li><a href="https://learn.microsoft.com/powershell/" target="_blank" rel="noopener">PowerShell Documentation</a><span>التوثيق الرسمي لتعلم PowerShell.</span></li>
+<li><a href="https://www.youtube.com/results?search_query=John+Savill+Technical+Training" target="_blank" rel="noopener">John Savill’s Technical Training</a><span>شرح ممتاز لـ Azure وEntra وAZ-900 وAZ-104 على YouTube.</span></li>
+<li><a href="https://www.youtube.com/results?search_query=Andy+Malone+MS-900" target="_blank" rel="noopener">Andy Malone</a><span>شرح لـ Microsoft 365 وMS-900.</span></li>
+<li><a href="https://www.youtube.com/results?search_query=Adam+Gordon+MD-102" target="_blank" rel="noopener">Adam Gordon</a><span>شرح لـ Intune وMD-102.</span></li>
+</ul>
+<h3>أدوات التطبيق</h3>
+<ul class="res">
+<li><a href="https://admin.microsoft.com" target="_blank" rel="noopener">admin.microsoft.com</a><span>لوحة إدارة Microsoft 365.</span></li>
+<li><a href="https://entra.microsoft.com" target="_blank" rel="noopener">entra.microsoft.com</a><span>الهوية والدخول.</span></li>
+<li><a href="https://intune.microsoft.com" target="_blank" rel="noopener">intune.microsoft.com</a><span>إدارة الأجهزة.</span></li>
+<li><a href="https://portal.azure.com" target="_blank" rel="noopener">portal.azure.com</a><span>بوابة Azure.</span></li>
+<li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a><span>ارفع عليه سكريبتات PowerShell ومشاريع الـ Lab.</span></li>
+</ul>
+</section>
+
+<section id="cv">
+<h2>حدّث الـ CV وLinkedIn أول بأول</h2>
+<ul>
+<li>بعد كل شهادة ضيفها في قسم Certifications بالسنة.</li>
+<li>ضيف Microsoft 365 وEntra ID وIntune وPowerShell في المهارات بعد ما تطبقهم فعلاً.</li>
+<li>انشر مشروع الـ Lab على LinkedIn كـ Featured.</li>
+<li>بعد MD-102 ابدأ قدّم على وظايف M365 Administrator وEndpoint Administrator.</li>
+</ul>
+</section>
+</main>
+
+<footer><div class="wrap">أعدّه لك Claude. راجع صفحات Microsoft Learn الرسمية للتأكد من تفاصيل الامتحانات الحالية.</div></footer>
+
+<script>
+(function(){
+var KEY='m365-guide-progress',saved={};
+try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){saved={}}
+var boxes=[].slice.call(document.querySelectorAll('input[data-k]'));
+function update(){
+var vis=boxes.filter(function(b){return !b.closest('[hidden]')});
+var done=vis.filter(function(b){return b.checked}).length;
+var pct=vis.length?Math.round(done/vis.length*100):0;
+document.getElementById('fill').style.width=pct+'%';
+document.getElementById('ptxt').textContent='خلّصت '+done+' من '+vis.length+' ('+pct+'%)';
+}
+boxes.forEach(function(b){
+b.checked=!!saved[b.dataset.k];
+b.addEventListener('change',function(){
+saved[b.dataset.k]=b.checked;
+try{localStorage.setItem(KEY,JSON.stringify(saved))}catch(e){}
+update();
+});
+});
+var A=document.getElementById('pA'),B=document.getElementById('pB'),tA=document.getElementById('tA'),tB=document.getElementById('tB');
+function pick(a){A.hidden=!a;B.hidden=a;tA.setAttribute('aria-pressed',a);tB.setAttribute('aria-pressed',!a);update();}
+tA.onclick=function(){pick(true)};tB.onclick=function(){pick(false)};
+update();
+})();
+</script>
+</body>
+</html>
